@@ -4,8 +4,11 @@
   "description": "Shopping List buit with the MERN stack",
   "main": "server.js",
   "scripts": {
+    "client-install": "yarn --cwd client add",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\" "
   },
   "repository": "https://github.com/ivanjulian/ShoppingList-MERNstack.git",
   "author": "IvanKhizhnyak <vanja.khizhnjak99@gmail.com>",
