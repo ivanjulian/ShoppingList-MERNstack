@@ -1,0 +1,23 @@
+{
+  "name": "ShoppingList-MERNstack",
+  "version": "1.0.0",
+  "description": "Shopping List buit with the MERN stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": "https://github.com/ivanjulian/ShoppingList-MERNstack.git",
+  "author": "IvanKhizhnyak <vanja.khizhnjak99@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
