@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   ListGroup,
@@ -10,14 +10,27 @@ import {
   TransitionGroup
 } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types'
+function ShoppingList(props) {
 
-function ShoppingList() {
-  const [items, setItems] = useState([
-    { id: uuid(), name: "Eggs" },
-    { id: uuid(), name: "Milk" },
-    { id: uuid(), name: "Apples" },
-    { id: uuid(), name: "Water" }
-  ])
+  // такие же данные в props.item.items
+  // const [items, setItems] = useState([
+  //   { id: uuid(), name: "Eggs" },
+  //   { id: uuid(), name: "Milk" },
+  //   { id: uuid(), name: "Apples" },
+  //   { id: uuid(), name: "Water" }
+  // ])
+
+  const [items, setItems] = useState(props.item.items);
+
+  useEffect(() => {
+    props.getItems();
+    console.log(props.item.items.length);
+    setItems(props.item.items)
+  }, [props.item.items])
+
 
   return (
     <Container>
@@ -59,4 +72,14 @@ function ShoppingList() {
   )
 }
 
-export default ShoppingList;
+ShoppingList.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  item: state.item
+})
+
+
+export default connect(mapStateToProps, {getItems})(ShoppingList);
