@@ -11,7 +11,7 @@ import {
 } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types'
 function ShoppingList(props) {
 
@@ -31,6 +31,10 @@ function ShoppingList(props) {
     setItems(props.item.items)
   }, [props.item.items])
 
+  const onDeleteClick = (event, id) => {
+    event.preventDefault();
+    props.deleteItem(id);
+  }
 
   return (
     <Container>
@@ -56,11 +60,7 @@ function ShoppingList(props) {
                   className="remove-btn"
                   color="danger"
                   size="sm"
-                  onClick={() => {
-                    setItems(
-                      items.filter(item => item.id !== id)
-                    )
-                  }}
+                  onClick={event => onDeleteClick(event,id)}
                 >&times;</Button>
                 {name}
               </ListGroupItem>
@@ -82,4 +82,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {getItems})(ShoppingList);
+export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
