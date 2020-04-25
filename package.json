@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "client": "yarn --cwd client start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd client add && yarn --cwd client run build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client add && yarn --cwd client run build"
   },
   "repository": "https://github.com/ivanjulian/ShoppingList-MERNstack.git",
   "author": "IvanKhizhnyak <vanja.khizhnjak99@gmail.com>",
