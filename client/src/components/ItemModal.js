@@ -11,9 +11,10 @@ import {
 } from 'reactstrap';
 import {connect} from 'react-redux';
 import {addItem} from '../actions/itemActions'
-import { model } from 'mongoose';
+import { model, PromiseProvider } from 'mongoose';
+import {v4 as uuid} from 'uuid';
 
-function ItemModal() {
+function ItemModal(props) {
   const [modal, setModal] = useState({
     modalIsOpen: false,
     name: ''
@@ -21,16 +22,34 @@ function ItemModal() {
 
   const toggle = () => {
     setModal({
-      modalIsOpen: !modal.modalIsOpen,
-      name: ''
+      ...modal,
+      modalIsOpen: !modal.modalIsOpen
     })
-    console.log('TOggle did');
+    // console.log('TOggle did');
   }
 
   const onChange = e =>{
+   // e.preventDefault();
     setModal({
-      [e.target.name]: e.target.value 
+      ...modal,
+      name: e.target.value 
+      // [e.target.name]: e.target.value 
     })
+  }
+
+  const onSubmit = e =>{
+    e.preventDefault();
+
+    const newItem = {
+      id: uuid(),
+      name: modal.name
+    }
+
+    //Add item via addItem action
+    props.addItem(newItem);
+
+    //Close modal
+    toggle();
   }
   return (
     <div>
@@ -46,7 +65,7 @@ function ItemModal() {
     >
       <ModalHeader toggle={toggle}> Add to Shopping List </ModalHeader>
       <ModalBody>
-        <Form /*onSubmit={onSubmit}*/>
+        <Form onSubmit={onSubmit}>
           <FormGroup>
             <Label for="item">
               Item
@@ -59,6 +78,12 @@ function ItemModal() {
               placeholder="Add Shopping Item"
               onChange={onChange}
             />
+            <Button
+              color="dark"
+              style={{marginTop: '2rem'}}
+              //type="submit"
+              block
+            > Add Item</Button>
           </FormGroup>
         </Form>
       </ModalBody>
@@ -67,5 +92,7 @@ function ItemModal() {
 
   )
 }
-
-export default connect()(ItemModal);
+const mapStateToProps = state => ({
+  item: state.item
+})
+export default connect(mapStateToProps, {addItem})(ItemModal);
