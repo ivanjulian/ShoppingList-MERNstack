@@ -12,7 +12,7 @@ import {
 import {connect} from 'react-redux';
 import {addItem} from '../actions/itemActions'
 import { model, PromiseProvider } from 'mongoose';
-import {v4 as uuid} from 'uuid';
+//import {v4 as uuid} from 'uuid';
 
 function ItemModal(props) {
   const [modal, setModal] = useState({
@@ -41,7 +41,7 @@ function ItemModal(props) {
     e.preventDefault();
 
     const newItem = {
-      id: uuid(),
+      //id: uuid(),
       name: modal.name
     }
 

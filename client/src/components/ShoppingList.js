@@ -23,13 +23,13 @@ function ShoppingList(props) {
   //   { id: uuid(), name: "Water" }
   // ])
 
-  const [items, setItems] = useState(props.item.items);
-
+  //const [items, setItems] = useState(props.item.items);
+  const {items} = props.item;
   useEffect(() => {
     props.getItems();
-    console.log(props.item.items.length);
-    setItems(props.item.items)
-  }, [props.item.items])
+    console.log(items);
+    //setItems(props.item.items)
+  }, [])
 
   const onDeleteClick = (event, id) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ function ShoppingList(props) {
 
   return (
     <Container>
-      <Button
+      {/* <Button
         color="dark"
         style={{ marginBottom: '2rem' }}
         onClick={() => {
@@ -50,17 +50,17 @@ function ShoppingList(props) {
             ])
           }
         }}
-      >Add Item</Button>
+      >Add Item</Button> */}
       <ListGroup>
         <TransitionGroup className="shopping-list">
-          {items.map(({ id, name }) => (
-            <CSSTransition key={id} timeout={500} classNames="fade">
+          {items.map(({ _id, name }) => (
+            <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Button
                   className="remove-btn"
                   color="danger"
                   size="sm"
-                  onClick={event => onDeleteClick(event,id)}
+                  onClick={event => onDeleteClick(event,_id)}
                 >&times;</Button>
                 {name}
               </ListGroupItem>
