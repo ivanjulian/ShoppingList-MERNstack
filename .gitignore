@@ -1,3 +1,6 @@
-node_modules/
+#dependencies
+/node_modules
+
+#api keys
+/config
 # package-lock.json
-# .env
