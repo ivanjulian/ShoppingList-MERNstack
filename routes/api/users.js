@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
     .then(user => {
       if (user) return res.status(400).json({ msg: 'User already exists' });
 
+      const newUser = User({
         name,
         email,
         password
