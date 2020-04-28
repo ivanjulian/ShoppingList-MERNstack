@@ -9,7 +9,7 @@ import {
   NavLink,
   Container
 } from 'reactstrap';
-import RegisterModal from './auth/RegisterModal'
+
 function AppNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +32,9 @@ function AppNavbar() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <RegisterModal />
+                <NavLink href="">
+                  Sign up
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://ivanjulian.github.io/">
