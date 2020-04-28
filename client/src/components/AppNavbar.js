@@ -9,7 +9,8 @@ import {
   NavLink,
   Container
 } from 'reactstrap';
-import RegisterModel from '../components/auth/RegisterModel'
+import RegisterModel from '../components/auth/RegisterModel';
+import LoginModel from '../components/auth/LoginModel'
 import Logout from '../components/auth/Logout'
 
 function AppNavbar() {
@@ -29,9 +30,7 @@ function AppNavbar() {
           <Collapse isOpen={isOpen} navbar >
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="">
-                  Log in
-                </NavLink>
+                <LoginModel />
               </NavItem>
               <NavItem>
                 <RegisterModel />
