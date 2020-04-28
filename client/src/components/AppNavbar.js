@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import {
   Collapse,
   Navbar,
@@ -9,16 +9,48 @@ import {
   NavLink,
   Container
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import RegisterModel from '../components/auth/RegisterModel';
-import LoginModel from '../components/auth/LoginModel'
-import Logout from '../components/auth/Logout'
+import LoginModel from '../components/auth/LoginModel';
+import Logout from '../components/auth/Logout';
 
-function AppNavbar() {
+function AppNavbar(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  AppNavbar.propTypes = {
+    [props.auth]: PropTypes.object.isRequired
+  }
 
   const toggle = () => {
     setIsOpen(!isOpen);
   }
+
+
+  const { isAuthenticated, user } = props.auth;
+  const authLinks = (
+    <Fragment>
+      <NavItem>
+        <span className="navbar-text mr-3">
+          <strong>{user? `Welcome ${user.name}`: ''}</strong>
+        </span>
+      </NavItem>
+      <NavItem>
+        <Logout />
+      </NavItem>
+    </Fragment>
+  )
+
+  const guestLinks = (
+    <Fragment>
+      <NavItem>
+        <LoginModel />
+      </NavItem>
+      <NavItem>
+        <RegisterModel />
+      </NavItem>
+    </Fragment>
+  )
   return (
     <div>
       <Navbar color="dark" dark expand="sm" className="mb-5">
@@ -29,15 +61,7 @@ function AppNavbar() {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar >
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <LoginModel />
-              </NavItem>
-              <NavItem>
-                <RegisterModel />
-              </NavItem>
-              <NavItem>
-                <Logout/>
-              </NavItem>
+              {isAuthenticated ? authLinks : guestLinks}
               <NavItem>
                 <NavLink href="https://ivanjulian.github.io/">
                   About the Author
@@ -51,4 +75,8 @@ function AppNavbar() {
   )
 }
 
-export default AppNavbar
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(AppNavbar);

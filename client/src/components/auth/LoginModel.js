@@ -25,7 +25,7 @@ function LoginModel(props) {
     msg: null
   })
 
-  RegisterModal.propTypes = {
+  LoginModel.propTypes = {
     [props.isAuthenticated]: PropTypes.bool,
     [props.error]: PropTypes.object.isRequired,
     [props.ligin]: PropTypes.func.isRequired,
@@ -75,8 +75,13 @@ function LoginModel(props) {
 
   const onSubmit = e => {
     e.preventDefault();
+    const user = {
+      email: modal.email,
+      password: modal.password
+    }
 
-    
+    //Attempt to login
+    props.login(user);
     //Close modal
     // toggle();
   }
