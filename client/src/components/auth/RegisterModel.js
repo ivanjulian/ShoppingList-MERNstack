@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 // import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
-// import {register} from '../../actions/authActions';
+ import {register} from '../../actions/authActions';
 
 function RegisterModal(props) {
   const [modal, setModal] = useState({
@@ -59,14 +59,14 @@ function RegisterModal(props) {
     // props.addItem(newItem);
     // const {name, email, password} = modal;
 
-    // const newUser ={
-    //   name: modal.name,
-    //   email: modal.email,
-    //   password: modal.password
-    // } 
+    const newUser ={
+      name: modal.name,
+      email: modal.email,
+      password: modal.password
+    } 
 
     //Attempt to register
-    // props.register(newUser);
+    props.register(newUser);
 
     //Close modal
     // toggle();
@@ -142,4 +142,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error
 })
-export default connect(mapStateToProps, {})(RegisterModal);
+export default connect(mapStateToProps, {register})(RegisterModal);
