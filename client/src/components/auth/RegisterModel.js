@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Modal,
@@ -8,12 +8,14 @@ import {
   FormGroup,
   Label,
   Input,
-  NavLink
+  NavLink,
+  Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
 // import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
- import {register} from '../../actions/authActions';
+import { register } from '../../actions/authActions';
+import {clearErrors} from '../../actions/errorActions'
 
 function RegisterModal(props) {
   const [modal, setModal] = useState({
@@ -27,10 +29,35 @@ function RegisterModal(props) {
   const propTypes = {
     [props.isAuthenticated]: PropTypes.bool,
     [props.error]: PropTypes.object.isRequired,
-    [props.register]: PropTypes.func.isRequired
+    [props.register]: PropTypes.func.isRequired,
+    [props.clearErrors]: PropTypes.func. isRequired
   }
 
+  useEffect(() => {
+    if (props.error.id == 'REGISTER_FAIL') {
+      setModal({
+        ...modal,
+        msg: props.error.msg.msg
+      })
+    } else {
+      setModal({
+        ...modal,
+        msg: null
+      })
+    }
+
+    //If authenticated - close modal
+    if(modal.modalIsOpen){
+      if(props.isAuthenticated){
+        toggle();
+      }
+    }
+  }, [props.error, props.isAuthenticated])
+
   const toggle = () => {
+    //Clear errors
+    props.clearErrors();
+    
     setModal({
       ...modal,
       modalIsOpen: !modal.modalIsOpen
@@ -42,7 +69,7 @@ function RegisterModal(props) {
     // e.preventDefault();
     setModal({
       ...modal,
-      name: e.target.value
+      [e.target.id]: e.target.value
       // [e.target.name]: e.target.value 
     })
   }
@@ -59,11 +86,11 @@ function RegisterModal(props) {
     // props.addItem(newItem);
     // const {name, email, password} = modal;
 
-    const newUser ={
+    const newUser = {
       name: modal.name,
       email: modal.email,
       password: modal.password
-    } 
+    }
 
     //Attempt to register
     props.register(newUser);
@@ -83,6 +110,7 @@ function RegisterModal(props) {
       >
         <ModalHeader toggle={toggle}> Register </ModalHeader>
         <ModalBody>
+        {modal.msg ? <Alert color="danger">{modal.msg}</Alert>: null}
           <Form onSubmit={onSubmit}>
             <FormGroup>
               <Label for="name">
@@ -142,4 +170,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error
 })
-export default connect(mapStateToProps, {register})(RegisterModal);
+export default connect(mapStateToProps, { register, clearErrors })(RegisterModal);
