@@ -10,6 +10,7 @@ import {
   Container
 } from 'reactstrap';
 import RegisterModel from '../components/auth/RegisterModel'
+import Logout from '../components/auth/Logout'
 
 function AppNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,9 @@ function AppNavbar() {
               </NavItem>
               <NavItem>
                 <RegisterModel />
+              </NavItem>
+              <NavItem>
+                <Logout/>
               </NavItem>
               <NavItem>
                 <NavLink href="https://ivanjulian.github.io/">

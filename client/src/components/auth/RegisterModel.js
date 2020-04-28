@@ -26,7 +26,7 @@ function RegisterModal(props) {
     msg: null
   })
 
-  const propTypes = {
+  RegisterModal.propTypes = {
     [props.isAuthenticated]: PropTypes.bool,
     [props.error]: PropTypes.object.isRequired,
     [props.register]: PropTypes.func.isRequired,
