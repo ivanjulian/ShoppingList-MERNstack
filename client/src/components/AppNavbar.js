@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import {
   Collapse,
   Navbar,
@@ -15,8 +15,14 @@ import RegisterModel from '../components/auth/RegisterModel';
 import LoginModel from '../components/auth/LoginModel';
 import Logout from '../components/auth/Logout';
 
+import {logout} from '../actions/authActions';//to logout on reload, maybe need to delete this
+
 function AppNavbar(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(()=>{
+    props.logout();
+  }, [])
 
   AppNavbar.propTypes = {
     [props.auth]: PropTypes.object.isRequired
@@ -79,4 +85,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, null)(AppNavbar);
+export default connect(mapStateToProps, {logout})(AppNavbar);

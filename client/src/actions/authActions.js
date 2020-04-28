@@ -34,7 +34,7 @@ export const register = ({ name, email, password }) => dispatch => {
   //Headers
   const config = {
     headers: {
-      'Content-type': 'application/json'
+      'Content-Type': 'application/json'
     }
   }
 
@@ -93,7 +93,7 @@ export const tokenConfig = getState => {
   //Headers
   const config = {
     headers: {
-      "Content-type": "application/json"
+      "Content-Type": "application/json"
     }
   }
 
