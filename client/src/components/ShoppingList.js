@@ -72,7 +72,6 @@ function ShoppingList(props) {
                 >&times;</Button>
                 : null
               }
-                
                 {name}
               </ListGroupItem>
             </CSSTransition>

@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 // import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
-import {clearErrors} from '../../actions/errorActions'
+import { clearErrors } from '../../actions/errorActions'
 
 function RegisterModal(props) {
   const [modal, setModal] = useState({
@@ -30,7 +30,7 @@ function RegisterModal(props) {
     [props.isAuthenticated]: PropTypes.bool,
     [props.error]: PropTypes.object.isRequired,
     [props.register]: PropTypes.func.isRequired,
-    [props.clearErrors]: PropTypes.func. isRequired
+    [props.clearErrors]: PropTypes.func.isRequired
   }
 
   useEffect(() => {
@@ -47,8 +47,8 @@ function RegisterModal(props) {
     }
 
     //If authenticated - close modal
-    if(modal.modalIsOpen){
-      if(props.isAuthenticated){
+    if (modal.modalIsOpen) {
+      if (props.isAuthenticated) {
         toggle();
       }
     }
@@ -57,7 +57,7 @@ function RegisterModal(props) {
   const toggle = () => {
     //Clear errors
     props.clearErrors();
-    
+
     setModal({
       ...modal,
       modalIsOpen: !modal.modalIsOpen
@@ -108,9 +108,11 @@ function RegisterModal(props) {
         isOpen={modal.modalIsOpen}
         toggle={toggle}
       >
-        <ModalHeader toggle={toggle}> Register </ModalHeader>
+        <ModalHeader toggle={toggle}> 
+          <span style={{ color: '#F15440' }}>Register</span>
+        </ModalHeader>
         <ModalBody>
-        {modal.msg ? <Alert color="danger">{modal.msg}</Alert>: null}
+          {modal.msg ? <Alert color="danger">{modal.msg}</Alert> : null}
           <Form onSubmit={onSubmit}>
             <FormGroup>
               <Label for="name">

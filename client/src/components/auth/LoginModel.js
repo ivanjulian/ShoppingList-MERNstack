@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 // import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions'; //TODO: add login
-import {clearErrors} from '../../actions/errorActions'
+import { clearErrors } from '../../actions/errorActions'
 
 function LoginModel(props) {
   const [modal, setModal] = useState({
@@ -29,7 +29,7 @@ function LoginModel(props) {
     [props.isAuthenticated]: PropTypes.bool,
     [props.error]: PropTypes.object.isRequired,
     [props.ligin]: PropTypes.func.isRequired,
-    [props.clearErrors]: PropTypes.func. isRequired
+    [props.clearErrors]: PropTypes.func.isRequired
   }
 
   useEffect(() => {
@@ -46,8 +46,8 @@ function LoginModel(props) {
     }
 
     //If authenticated - close modal
-    if(modal.modalIsOpen){
-      if(props.isAuthenticated){
+    if (modal.modalIsOpen) {
+      if (props.isAuthenticated) {
         toggle();
       }
     }
@@ -56,7 +56,7 @@ function LoginModel(props) {
   const toggle = () => {
     //Clear errors
     props.clearErrors();
-    
+
     setModal({
       ...modal,
       modalIsOpen: !modal.modalIsOpen
@@ -95,9 +95,11 @@ function LoginModel(props) {
         isOpen={modal.modalIsOpen}
         toggle={toggle}
       >
-        <ModalHeader toggle={toggle}> Login </ModalHeader>
+        <ModalHeader toggle={toggle}>
+          <span style={{ color: '#F15440' }}>Login</span>
+        </ModalHeader>
         <ModalBody>
-        {modal.msg ? <Alert color="danger">{modal.msg}</Alert>: null}
+          {modal.msg ? <Alert color="danger">{modal.msg}</Alert> : null}
           <Form onSubmit={onSubmit}>
             <FormGroup>
               <Label for="email">
@@ -131,7 +133,9 @@ function LoginModel(props) {
                 style={{ marginTop: '2rem' }}
                 //type="submit"
                 block
-              > Login</Button>
+              >
+                Login
+              </Button>
             </FormGroup>
           </Form>
         </ModalBody>

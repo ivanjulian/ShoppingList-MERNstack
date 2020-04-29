@@ -1,3 +1,7 @@
+.App{
+  min-width: 300px;
+}
+
 .remove-btn {
   margin-right: 0.5rem;
 }

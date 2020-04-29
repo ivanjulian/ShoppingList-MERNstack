@@ -68,7 +68,14 @@ function ItemModal(props) {
           style={{ marginBottom: '2rem' }}
           onClick={toggle}
         >Add Item</Button>
-        : <h4 className="mb-3 ml-4">Please Log in to manage items</h4>
+        : <h4
+          className="mb-3 ml-4"
+          style={{
+            color: '#F15440',
+            textAlign: 'center'
+          }}>
+          Please, login to manage items
+        </h4>
       }
 
 

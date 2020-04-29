@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import RegisterModel from '../components/auth/RegisterModel';
 import LoginModel from '../components/auth/LoginModel';
 import Logout from '../components/auth/Logout';
-
+import image from '../List-PNG.png'
 import {logout} from '../actions/authActions';//to logout on reload, maybe need to delete this
 
 function AppNavbar(props) {
@@ -38,7 +38,7 @@ function AppNavbar(props) {
     <Fragment>
       <NavItem>
         <span className="navbar-text mr-3">
-          <strong>{user? `Welcome ${user.name}`: ''}</strong>
+          <strong>{user? `Welcome, ${user.name}!`: ''}</strong>
         </span>
       </NavItem>
       <NavItem>
@@ -62,14 +62,15 @@ function AppNavbar(props) {
       <Navbar color="dark" dark expand="sm" className="mb-5">
         <Container>
           <NavbarBrand href="/">
-            Shopping List
+            <img src={image} style={{width: 50, height: 50}} className="mr-3" />
+            <span style={{color: '#F15440'}} >Shopping List</span>
           </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar >
             <Nav className="ml-auto" navbar>
               {isAuthenticated ? authLinks : guestLinks}
               <NavItem>
-                <NavLink href="https://ivanjulian.github.io/">
+                <NavLink target="_blink" href="https://ivanjulian.github.io/">
                   About the Author
                 </NavLink>
               </NavItem>
