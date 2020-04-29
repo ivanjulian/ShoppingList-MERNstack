@@ -60,15 +60,12 @@ function LoginModel(props) {
       ...modal,
       modalIsOpen: !modal.modalIsOpen
     })
-    // console.log('TOggle did');
   }
 
   const onChange = e => {
-    // e.preventDefault();
     setModal({
       ...modal,
       [e.target.id]: e.target.value
-      // [e.target.name]: e.target.value 
     })
   }
 
@@ -81,8 +78,6 @@ function LoginModel(props) {
 
     //Attempt to login
     props.login(user);
-    //Close modal
-    // toggle();
   }
   return (
     <div>
