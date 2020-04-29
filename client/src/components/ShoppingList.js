@@ -25,11 +25,18 @@ function ShoppingList(props) {
 
   //const [items, setItems] = useState(props.item.items);
   const {items} = props.item;
+
   useEffect(() => {
     props.getItems();
     console.log(items);
     //setItems(props.item.items)
   }, [])
+
+  ShoppingList.propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool 
+  }
 
   const onDeleteClick = (event, id) => {
     event.preventDefault();
@@ -56,12 +63,16 @@ function ShoppingList(props) {
           {items.map(({ _id, name }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
-                <Button
+              {props.isAuthenticated
+              ? <Button
                   className="remove-btn"
                   color="danger"
                   size="sm"
                   onClick={event => onDeleteClick(event,_id)}
                 >&times;</Button>
+                : null
+              }
+                
                 {name}
               </ListGroupItem>
             </CSSTransition>
@@ -72,13 +83,11 @@ function ShoppingList(props) {
   )
 }
 
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
-}
+
 
 const mapStateToProps = (state) => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 
