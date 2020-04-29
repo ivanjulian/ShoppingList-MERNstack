@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://ivan:defender@storage-mtrxw.mongodb.net/test",
-  "jwtSecret": "sl_myJwtSecret"
-}
