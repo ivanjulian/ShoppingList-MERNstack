@@ -12,7 +12,6 @@ import {
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
-// import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions'
@@ -62,29 +61,18 @@ function RegisterModal(props) {
       ...modal,
       modalIsOpen: !modal.modalIsOpen
     })
-    // console.log('TOggle did');
   }
 
   const onChange = e => {
-    // e.preventDefault();
     setModal({
       ...modal,
       [e.target.id]: e.target.value
-      // [e.target.name]: e.target.value 
     })
   }
 
   const onSubmit = e => {
     e.preventDefault();
 
-    // const newItem = {
-    //   //id: uuid(),
-    //   name: modal.name
-    // }
-
-    // //Add item via addItem action
-    // props.addItem(newItem);
-    // const {name, email, password} = modal;
 
     const newUser = {
       name: modal.name,
@@ -94,9 +82,6 @@ function RegisterModal(props) {
 
     //Attempt to register
     props.register(newUser);
-
-    //Close modal
-    // toggle();
   }
   return (
     <div>
@@ -109,7 +94,7 @@ function RegisterModal(props) {
         toggle={toggle}
       >
         <ModalHeader toggle={toggle}> 
-          <span style={{ color: '#F15440' }}>Register</span>
+          <span style={{ color: '#F15440',textShadow: '1px 1px 2px #CCCECF'}}>Register</span>
         </ModalHeader>
         <ModalBody>
           {modal.msg ? <Alert color="danger">{modal.msg}</Alert> : null}

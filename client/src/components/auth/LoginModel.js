@@ -12,9 +12,8 @@ import {
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
-// import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
-import { login } from '../../actions/authActions'; //TODO: add login
+import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions'
 
 function LoginModel(props) {
@@ -96,7 +95,7 @@ function LoginModel(props) {
         toggle={toggle}
       >
         <ModalHeader toggle={toggle}>
-          <span style={{ color: '#F15440' }}>Login</span>
+          <span style={{ color: '#F15440', textShadow: ' 1px 1px 2px #CCCECF'}}>Login</span>
         </ModalHeader>
         <ModalBody>
           {modal.msg ? <Alert color="danger">{modal.msg}</Alert> : null}

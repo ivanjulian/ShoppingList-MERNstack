@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
@@ -11,9 +11,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions'
-import { model, PromiseProvider } from 'mongoose';
 import PropTypes from 'prop-types';
-//import {v4 as uuid} from 'uuid';
 
 function ItemModal(props) {
   const [modal, setModal] = useState({
@@ -21,9 +19,6 @@ function ItemModal(props) {
     name: ''
   })
 
-  // useEffect(()=>{
-
-  // }, [props.isAuthenticated])
   console.log(props);
   ItemModal.propTypes = {
     [props.isAuthenticated]: PropTypes.bool
@@ -34,15 +29,12 @@ function ItemModal(props) {
       ...modal,
       modalIsOpen: !modal.modalIsOpen
     })
-    // console.log('TOggle did');
   }
 
   const onChange = e => {
-    // e.preventDefault();
     setModal({
       ...modal,
       name: e.target.value
-      // [e.target.name]: e.target.value 
     })
   }
 
@@ -50,7 +42,6 @@ function ItemModal(props) {
     e.preventDefault();
 
     const newItem = {
-      //id: uuid(),
       name: modal.name
     }
 
@@ -68,14 +59,15 @@ function ItemModal(props) {
           style={{ marginBottom: '2rem' }}
           onClick={toggle}
         >Add Item</Button>
-        : <h4
+        : <h3
           className="mb-3 ml-4"
           style={{
             color: '#F15440',
-            textAlign: 'center'
+            textAlign: 'center',
+            textShadow: ' 1px 1px 2px #CCCECF'
           }}>
           Please, login to manage items
-        </h4>
+        </h3>
       }
 
 
@@ -83,17 +75,19 @@ function ItemModal(props) {
         isOpen={modal.modalIsOpen}
         toggle={toggle}
       >
-        <ModalHeader toggle={toggle}> Add to Shopping List </ModalHeader>
+        <ModalHeader toggle={toggle}>
+         <span style={{ color: '#F15440', textShadow: ' 1px 1px 2px #CCCECF'}}>Add to Shopping List</span>
+         </ModalHeader>
         <ModalBody>
           <Form onSubmit={onSubmit}>
             <FormGroup>
               <Label for="item">
-                Item
+                Item:
             </Label>
 
               <Input
                 type="text"
-                name={model.name}
+                name={modal.name}
                 id="item"
                 placeholder="Add Shopping Item"
                 onChange={onChange}
