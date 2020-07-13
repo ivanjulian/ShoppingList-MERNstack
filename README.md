@@ -6,6 +6,8 @@
   All the items are general, so each registered user could see them.
   
  CREATED with MERN Stack (MongoDB, Express, React, NodeJS).
+ 
+ SITE: https://shopping-list-by-ivanjulian.herokuapp.com/
   
  TODO:
   Soon I'm going to update it to be personal, with personal items.
